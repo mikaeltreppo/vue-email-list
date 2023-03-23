@@ -1,19 +1,21 @@
 const { createApp } = Vue
 
-  createApp({
+createApp({
     data() {
-      return {
-        randomEmail:'',
-      }
-    },
-    mounted(){
-        axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
-    .then( (response) => {
-            this.randomEmail = response.data.response;
-             console.log(this.randomEmail)
+        return {
+            randomEmails: [
+
+            ],
         }
-      
-    ) 
-   
-    }
-  }).mount('#app')
+    },
+    mounted() {
+
+        for (let i = 0; i == 9; i++) {
+            axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then((response) => {
+                let randomEmail = response.data.response;
+                this.randomEmails.push(randomEmail)
+            }
+            )
+
+        }
+    }}).mount('#app')
